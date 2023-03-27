@@ -1,6 +1,6 @@
 > This is not Final version. You can modify it according to your need 
 # Docker-File-for-Laravel-App-Container  (LAMP STACK)
-this docker file is for Laravel Environment containing PHP, APACHE, MYSQL, PHPMYADMIN Containers and  
+this docker file is for Laravel Environment containing PHP, APACHE, MYSQL, PHPMYADMIN Containers
 
 
 ```bash
