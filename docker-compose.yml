@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:8.0.28
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: orhan_tech
+    volumes:
+      - db_data:/var/lib/mysql
+
+  php:
+    build: .
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./v2_c4w:/var/www/html
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  db_data:
