@@ -3,15 +3,19 @@ version: '3.7'
 services:
   db:
     image: mysql:8.0.28
+    container_name: mysql8
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: orhan_tech
+    ports:
+      - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
 
   php:
     build: .
+    container_name: php
     restart: always
     ports:
       - "8080:80"
@@ -20,6 +24,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     restart: always
     ports:
       - "8081:80"
