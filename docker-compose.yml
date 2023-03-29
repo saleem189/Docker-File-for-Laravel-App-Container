@@ -7,20 +7,25 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: Database Name
+      MYSQL_DATABASE: db_name_here
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - net-laravel-app
 
   php:
-    build: .
+    # build: .
+    image: laravel_app:latest
     container_name: php
     restart: always
     ports:
       - "8080:80"
     volumes:
       - ./v2_c4w:/var/www/html
+    networks:
+      - net-laravel-app
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -31,6 +36,14 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: root
+    networks:
+      - net-laravel-app
 
 volumes:
   db_data:
+
+#setting newtwoks which we defined using command "docker network create net-laravel-app"
+networks:
+  net-laravel-app:
+    external: true
+

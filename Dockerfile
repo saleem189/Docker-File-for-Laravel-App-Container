@@ -38,6 +38,9 @@ ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
+# add this line to suppress the warning message
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf  
+
 # Update uploads config
 RUN echo "file_uploads = On\n" \
          "memory_limit = 1024M\n" \
@@ -59,3 +62,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 # installing Laravel Global
 RUN composer global require laravel/installer
+
+# Set image tags
+LABEL maintainer="Saleem Ayoub Khan saleemayoub1@gmail.com"
+LABEL php-version="7.4.20"
+LABEL apache-version="2.4.38"
+LABEL imagick-version="3.4.4"
+LABEL composer-version="2.4.4"
